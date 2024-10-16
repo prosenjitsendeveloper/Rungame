@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .boygame {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    align-items: center;
+}
+.red-box {
+    width: 300px;
+    height: 300px;
+    background-color: red;
+    position: absolute;
+    margin-left: 1032px;
+    z-index: 0;
+}
+
+.boygame img {
+    position: relative;
+    z-index: 2;
+}
+</style>
+<body>
+
+ <h1 id="win"></h1>
+  <div class="boygame">
+    <img src="./image/boy.png" width="200px" height="150px" id="boy">
+    <div class="red-box" id="red-box"></div>
+  </div>
+
+  <button id="restart-button">Restart</button>
+
+
+  <script>
+    var left = 0;
+    var target = document.getElementById("boy");
+    var targetTwo = document.getElementById("red-box");
+    var win = document.getElementById("win");
+   document.querySelector("body").addEventListener("keyup",function(e){
+    
+    switch (e.key) {
+      case "ArrowLeft":
+        if(left < 1035){
+          left = left + 15;
+          break;
+        }
+       
+    
+      default: "Other key press"
+        break;
+    }
+    
+
+    target.style.marginLeft = left + "px";
+    if (left >= 1035) {
+            targetTwo.style.backgroundColor = "green";
+            left = 1035; // Stop further movement
+            win.innerHTML = "Congratulations! YOU ARE THE WINNER";
+        }
+  });
+
+  document.getElementById("restart-button").addEventListener("click", function() {
+            left = 0;  // Reset the position
+            target.style.marginLeft = left + "px";  // Reset boy's margin-left
+            targetTwo.style.backgroundColor = "red";  // Reset red-box background color
+            win.innerHTML = "";
+        });
+  
+  </script>
+  
+</body>
+</html>
